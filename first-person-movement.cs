@@ -38,6 +38,10 @@ public class FirstPersonMovement : MonoBehaviour
         HandleInput();
         MovePlayer();
         MoveCamera();
+        if (!isSliding || !Sneaking)
+        {
+            Controller.height = StandingHeight;
+        }
     }
 
     private void HandleInput()
