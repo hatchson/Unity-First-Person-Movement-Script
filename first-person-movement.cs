@@ -24,6 +24,8 @@ public class FirstPersonMovement : MonoBehaviour
     [SerializeField] private float CameraCrouchOffset = 0.5f;
     [SerializeField] private bool isSliding = false;
     [SerializeField] private float slideTimer = 0f;
+    [SerializeField] private KeyCode SlideKey = KeyCode.LeftShift;
+    [SerializeField] private KeyCode CrouchKey = KeyCode.LeftControl;
 
     [Header("Player States")]
     [SerializeField] private Vector3 Velocity;
@@ -42,9 +44,9 @@ public class FirstPersonMovement : MonoBehaviour
     {
         PlayerMovementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         PlayerMouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-        Sneaking = Input.GetKey(KeyCode.LeftShift);
+        Sneaking = Input.GetKey(CrouchKey);
 
-        if (Input.GetKeyDown(KeyCode.LeftControl) && PlayerMovementInput.magnitude > 0 && Controller.isGrounded && !isSliding)
+        if (Input.GetKeyDown(SlideKey) && PlayerMovementInput.magnitude > 0 && Controller.isGrounded && !isSliding)
         {
             isSliding = true;
             slideTimer = SlideDuration;
